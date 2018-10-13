@@ -2,23 +2,13 @@
 $isedited    = $update["edited_message"];
 $isforwarded = $update["message"]["forward_from"];
 $ischannel   = $update["message"]["channel_post"];
-if (!$config["funziona_inoltrati"] && $isforwarded) {
-                return;
-}
-if (!$config["funziona_modificati"] && $isedited) {
-                return;
-}
-
-if (!$config["funziona_canali"] && $ischannel) {
-                return;
-}
-if ($isforwarded && $config["funziona_inoltrati"]) {
+if ($isforwarded) {
                 $fromnome     = $update["message"]["forward_from"]["first_name"];
                 $fromcognome  = $update["message"]["forward_from"]["last_name"];
                 $fromusername = $update["message"]["forward_from"]["username"];
                 $fromID       = $update["message"]["forward_from"]["id"];
 }
-if ($isedited && $config["funziona_modificati"]) {
+if ($isedited) {
                 $update['message'] = $update['edited_message'];
 }
 $chatID    = $update["message"]["chat"]["id"];
