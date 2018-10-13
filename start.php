@@ -1,10 +1,8 @@
 <?php
 
 $token  = "TOKEN"; //Botfather's api key
-$admin  = array( // ID of the admins 
-    430610430,
-);
-$config = array(
+$admin  =  [430610430]; // ID of the admins
+$config = [
     "db" => true, // true for using database
     "ip" => "localhost", 
     "user" => "root", 
@@ -12,7 +10,7 @@ $config = array(
     "database" => "databasename", 
     "table" => "bot", 
     "debug_mode" => false //true for showing all errors and notice
-);
+];
 if ($config['db']) {
     $db = new PDO("mysql:host=" . $config["ip"] . ";dbname=" . $config['database'], $config['user'], $config['password']);
 }
