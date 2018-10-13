@@ -33,9 +33,8 @@ if (!$offset) {
 }
 echo "[INFO] Starting fetching updates...\n";
 while (1) {
-    $l       = file_get_contents("last.json");
     $content = file_get_contents("http://api.telegram.org/bot$token/getUpdates?offset=$offset");
-    if ($l == $content || $content == '{"ok":true,"result":[]}') {
+    if ($content == '{"ok":true,"result":[]}') {
     } else {
         $offset++;
         $update = json_decode($content, true);
@@ -45,7 +44,7 @@ while (1) {
             include("database.php");
         }
     }
-    include("comandi.php");
+    include("bot.php");
     $plugins = scandir("plugins");
     foreach ($plugins as $plugin) {
             include("plugins/$plugin");
