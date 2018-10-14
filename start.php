@@ -22,6 +22,15 @@ $save = array(
     "admin" //list of variable
 );
 
+if ($config['debug_mode']) {
+    error_reporting(E_ALL);
+    if ($update){
+        echo "Got an update!";
+    }
+} else {
+    error_reporting(0);
+}
+
 if ($config['db']) {
     $db = new PDO("mysql:host=" . $config["ip"] . ";dbname=" . $config['database'], $config['user'], $config['password']);
 }
@@ -63,13 +72,4 @@ while (1) {
             }
         }
         unset($vars);
-}
-
-if ($config['debug_mode']) {
-    error_reporting(E_ALL);
-    if ($update){
-        echo "Got an update!";
-    }
-} else {
-    error_reporting(0);
 }
