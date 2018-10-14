@@ -136,5 +136,5 @@ Formattazione: " . $config['parse_mode'], $t);
             $db->query("update $table set page = '' where chat_id = $id");
             sm($chatID, "Ho sbannato $campo[1]");
         }
-    }
+
 
