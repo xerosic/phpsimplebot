@@ -1,21 +1,25 @@
 <?php
 
-function request($method, $args = [])
+function request($method, $args)
 {
-  $c = curl_init();
-  curl_setopt_array($c, [
-    CURLOPT_URL => 'https://api.telegram.org/bot' . $token . '/' . $method,
-    CURLOPT_RETURNTRANSFER => True,
-    CURLOPT_POST => True,
-    CURLOPT_POSTFIELDS => $args
-    ]);
-  $r = curl_exec($c);
-  curl_close($c);
-  return json_decode($r, True);
+    global $token;
+    $args    = http_build_query($args);
+    $request = curl_init("https://api.telegram.org/bot$token/$method");
+    curl_setopt_array($request, array(
+        CURLOPT_CONNECTTIMEOUT => 1,
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_USERAGENT => 'cURL request',
+        CURLOPT_POST => 1,
+        CURLOPT_POSTFIELDS => $args
+    ));
+    $result = curl_exec($request);
+    curl_close($request);
+    return $result;
 }
 
 function sendMessage($chatID, $message){
-  return request("sendMessage", ["chat_id" => $chatID, "text" => $message]);
+  $args = ["chat_id" => $chatID, "text" => $message];
+  return request("sendMessage", $args);
 }
 
 // Add your own functions
